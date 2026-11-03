@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Received</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 520px;
+      padding: 2.5rem;
+    }
+
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .success-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .details {
+      background: #f9fafb;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .detail-row {
+      margin-bottom: 1rem;
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #9ca3af;
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-value {
+      font-size: 1rem;
+      color: #1f2937;
+      word-break: break-word;
+    }
+
+    .message-value {
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    a.back-link {
+      display: inline-block;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    a.back-link:hover {
+      color: #764ba2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+      </svg>
+    </div>
+
+    <h1>Thank You!</h1>
+    <p class="subtitle">Your message has been received successfully.</p>
+
+    <div class="details">
+      <div class="detail-row">
+        <div class="detail-label">Name</div>
+        <div class="detail-value"><%= name %></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Email</div>
+        <div class="detail-value"><%= email %></div>
+      </div>
+
+      <div class="detail-row">
+        <div class="detail-label">Message</div>
+        <div class="detail-value message-value"><%= message %></div>
+      </div>
+    </div>
+
+    <a href="/" class="back-link">&larr; Send another message</a>
+  </div>
+</body>
+</html>

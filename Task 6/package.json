@@ -1,0 +1,21 @@
+{
+  "name": "cognifyz-task6-auth",
+  "version": "1.0.0",
+  "description": "Task 6: Database Integration & User Authentication",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["express", "mongodb", "authentication", "ejs"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.7.0"
+  }
+}

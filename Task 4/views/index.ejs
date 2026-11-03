@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4 — Form Validation & Dynamic DOM</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Cognifyz Registration Portal</h1>
+      <p class="subtitle">Complex Form Validation &amp; Dynamic DOM Manipulation</p>
+    </header>
+
+    <nav class="tab-nav" role="tablist" aria-label="Main navigation">
+      <button class="tab-btn active" data-route="register" role="tab" aria-selected="true" aria-controls="register-panel">
+        Register Form
+      </button>
+      <button class="tab-btn" data-route="users" role="tab" aria-selected="false" aria-controls="users-panel">
+        Registered Users
+        <span class="badge" id="user-count"><%= users.length %></span>
+      </button>
+      <button class="tab-btn" data-route="terms" role="tab" aria-selected="false" aria-controls="terms-panel">
+        Terms
+      </button>
+    </nav>
+
+    <main class="content-area">
+      <!-- Register Panel -->
+      <section id="register-panel" class="panel active" role="tabpanel" aria-labelledby="register-tab">
+        <div id="alert-container" class="alert-container" aria-live="polite"></div>
+
+        <form id="registration-form" novalidate>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe" autocomplete="name">
+            <span class="field-error" id="fullName-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" autocomplete="email">
+            <span class="field-error" id="email-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="password" name="password" placeholder="Create a strong password" autocomplete="new-password">
+              <button type="button" class="toggle-password" data-target="password" aria-label="Toggle password visibility">
+                <span class="eye-icon">👁</span>
+              </button>
+            </div>
+            <div class="password-strength" id="password-strength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <span class="strength-label" id="strength-label">Enter a password</span>
+            </div>
+            <ul class="password-rules" id="password-rules">
+              <li data-rule="length"><span class="rule-icon">○</span> At least 8 characters</li>
+              <li data-rule="uppercase"><span class="rule-icon">○</span> One uppercase letter</li>
+              <li data-rule="lowercase"><span class="rule-icon">○</span> One lowercase letter</li>
+              <li data-rule="number"><span class="rule-icon">○</span> One number</li>
+              <li data-rule="special"><span class="rule-icon">○</span> One special character</li>
+            </ul>
+            <span class="field-error" id="password-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" autocomplete="new-password">
+              <button type="button" class="toggle-password" data-target="confirmPassword" aria-label="Toggle confirm password visibility">
+                <span class="eye-icon">👁</span>
+              </button>
+            </div>
+            <span class="match-indicator" id="match-indicator"></span>
+            <span class="field-error" id="confirmPassword-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" placeholder="18" min="13" max="120">
+            <span class="field-error" id="age-error"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            <span class="btn-text">Register</span>
+            <span class="btn-loader hidden" id="submit-loader">Registering...</span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Users Panel -->
+      <section id="users-panel" class="panel" role="tabpanel" aria-labelledby="users-tab" hidden>
+        <div class="panel-header">
+          <h2>Registered Users</h2>
+          <button type="button" class="btn btn-secondary btn-sm" id="refresh-users">Refresh</button>
+        </div>
+        <div id="users-list" class="users-list">
+          <p class="empty-state">No users registered yet. Be the first!</p>
+        </div>
+      </section>
+
+      <!-- Terms Panel -->
+      <section id="terms-panel" class="panel" role="tabpanel" aria-labelledby="terms-tab" hidden>
+        <h2>Terms &amp; Conditions</h2>
+        <div class="terms-content">
+          <h3>1. Acceptance of Terms</h3>
+          <p>By registering on this portal, you agree to comply with these terms and conditions. This is a demonstration application built for educational purposes as part of the Cognifyz training program.</p>
+
+          <h3>2. Data Collection</h3>
+          <p>We collect your full name, email address, and age during registration. Passwords are validated but not stored in this demo application. All user data is kept in server memory and will be lost when the server restarts.</p>
+
+          <h3>3. Password Requirements</h3>
+          <p>For your security, passwords must meet the following criteria: minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character.</p>
+
+          <h3>4. Age Requirement</h3>
+          <p>Users must be at least 13 years old to register. This requirement helps ensure compliance with data protection regulations for minors.</p>
+
+          <h3>5. Privacy</h3>
+          <p>This is a local development demo. No data is transmitted to external services. Your information exists only in the server's in-memory storage during the current session.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Cognifyz Task 4 — Node.js, Express &amp; EJS</p>
+    </footer>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

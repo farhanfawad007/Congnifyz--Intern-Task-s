@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <main class="container">
+    <section class="card dashboard-card">
+      <header class="dashboard-header">
+        <div>
+          <h1>Welcome, <%= user.username %>!</h1>
+          <p class="subtitle">Your protected dashboard</p>
+        </div>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+      </header>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <div class="user-details">
+        <h2>Account Details</h2>
+        <dl>
+          <div class="detail-row">
+            <dt>Username</dt>
+            <dd><%= user.username %></dd>
+          </div>
+          <div class="detail-row">
+            <dt>Email</dt>
+            <dd><%= user.email %></dd>
+          </div>
+          <div class="detail-row">
+            <dt>Member Since</dt>
+            <dd><%= new Date(user.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></dd>
+          </div>
+          <div class="detail-row">
+            <dt>User ID</dt>
+            <dd><code><%= user._id %></code></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="info-box">
+        <p>This page is protected by authentication middleware. Only logged-in users can view it.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

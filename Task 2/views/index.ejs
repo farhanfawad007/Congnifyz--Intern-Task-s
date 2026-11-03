@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f4f6f8; color: #333;">
+
+  <div style="max-width: 520px; margin: 40px auto; padding: 32px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+
+    <h1 style="margin: 0 0 8px 0; font-size: 28px; color: #1a1a2e; text-align: center;">User Registration</h1>
+    <p style="margin: 0 0 24px 0; font-size: 14px; color: #666; text-align: center;">Please fill in all fields to create your account.</p>
+
+    <% if (errors && errors.length > 0) { %>
+      <div id="server-errors" style="margin-bottom: 20px; padding: 14px 16px; background-color: #fdecea; border: 1px solid #f5c6cb; border-radius: 6px; color: #721c24;">
+        <strong style="display: block; margin-bottom: 8px;">Please fix the following errors:</strong>
+        <ul style="margin: 0; padding-left: 20px;">
+          <% errors.forEach(function(error) { %>
+            <li style="margin-bottom: 4px;"><%= error %></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% } %>
+
+    <div id="client-errors" style="display: none; margin-bottom: 20px; padding: 14px 16px; background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 6px; color: #856404;">
+      <strong style="display: block; margin-bottom: 8px;">Please fix the following errors:</strong>
+      <ul id="client-error-list" style="margin: 0; padding-left: 20px;"></ul>
+    </div>
+
+    <form id="registration-form" action="/submit" method="POST" novalidate>
+
+      <div style="margin-bottom: 18px;">
+        <label for="name" style="display: block; margin-bottom: 6px; font-weight: bold; font-size: 14px;">Name <span style="color: #e74c3c;">*</span></label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= formData.name %>"
+          placeholder="Enter your full name"
+          style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;"
+        >
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <label for="email" style="display: block; margin-bottom: 6px; font-weight: bold; font-size: 14px;">Email <span style="color: #e74c3c;">*</span></label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<%= formData.email %>"
+          placeholder="you@example.com"
+          style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;"
+        >
+      </div>
+
+      <div style="margin-bottom: 18px;">
+        <label for="password" style="display: block; margin-bottom: 6px; font-weight: bold; font-size: 14px;">Password <span style="color: #e74c3c;">*</span></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value="<%= formData.password %>"
+          placeholder="Minimum 6 characters"
+          style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;"
+        >
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <label for="age" style="display: block; margin-bottom: 6px; font-weight: bold; font-size: 14px;">Age <span style="color: #e74c3c;">*</span></label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          value="<%= formData.age %>"
+          placeholder="Must be 18 or older"
+          min="1"
+          style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;"
+        >
+      </div>
+
+      <button
+        type="submit"
+        style="width: 100%; padding: 12px; font-size: 16px; font-weight: bold; color: #ffffff; background-color: #4a90d9; border: none; border-radius: 6px; cursor: pointer;"
+      >
+        Register
+      </button>
+
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById('registration-form');
+      var clientErrorsBox = document.getElementById('client-errors');
+      var clientErrorList = document.getElementById('client-error-list');
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      form.addEventListener('submit', function (event) {
+        var errors = [];
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value;
+        var age = document.getElementById('age').value.trim();
+
+        if (!name) {
+          errors.push('Name is required.');
+        }
+
+        if (!email) {
+          errors.push('Email is required.');
+        } else if (!emailRegex.test(email)) {
+          errors.push('Please enter a valid email address.');
+        }
+
+        if (!password) {
+          errors.push('Password is required.');
+        } else if (password.length < 6) {
+          errors.push('Password must be at least 6 characters long.');
+        }
+
+        if (!age) {
+          errors.push('Age is required.');
+        } else {
+          var ageNum = Number(age);
+          if (isNaN(ageNum) || ageNum <= 0) {
+            errors.push('Age must be a positive number.');
+          } else if (ageNum < 18) {
+            errors.push('You must be at least 18 years old to register.');
+          }
+        }
+
+        if (errors.length > 0) {
+          event.preventDefault();
+          clientErrorList.innerHTML = '';
+          errors.forEach(function (msg) {
+            var li = document.createElement('li');
+            li.style.marginBottom = '4px';
+            li.textContent = msg;
+            clientErrorList.appendChild(li);
+          });
+          clientErrorsBox.style.display = 'block';
+          clientErrorsBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          clientErrorsBox.style.display = 'none';
+          clientErrorList.innerHTML = '';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

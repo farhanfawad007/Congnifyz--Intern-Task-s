@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 7: External API Data</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; padding: 2rem; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .alert { padding: 1rem; background-color: #ffcccc; color: #cc0000; border-radius: 4px; border: 1px solid #cc0000; margin-bottom: 1rem; }
+        .profile { text-align: center; }
+        .profile img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #eee; margin-bottom: 1rem; }
+        .profile h2 { margin: 0 0 0.5rem 0; color: #2c3e50; }
+        .profile p { color: #555; }
+        .stats { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #eee; }
+        .btn { display: inline-block; margin-top: 1.5rem; padding: 0.75rem 1.5rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; }
+        .btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <% if (error) { %>
+        <div class="alert">
+            <strong>Error!</strong> <%= error %>
+        </div>
+        <p>Ensure you are passing the correct API key in the URL. Example: <code>?api_key=cognifyz_secret_key_2026</code></p>
+    <% } else if (data) { %>
+        <div class="profile">
+            <img src="<%= data.avatar_url %>" alt="<%= data.username %>'s avatar">
+            <h2><%= data.name %> (@<%= data.username %>)</h2>
+            <p><i><%= data.bio %></i></p>
+            <div class="stats">
+                <div>
+                    <strong>Public Repositories</strong><br>
+                    <%= data.public_repos %>
+                </div>
+            </div>
+            <a href="<%= data.profile_url %>" target="_blank" class="btn">View GitHub Profile</a>
+        </div>
+    <% } else { %>
+        <p>No data available.</p>
+    <% } %>
+</div>
+</body>
+</html>

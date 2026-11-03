@@ -1,0 +1,17 @@
+{
+  "name": "task5-api-integration",
+  "version": "1.0.0",
+  "description": "Cognifyz Task 5 - API Integration & Front-End Interaction",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["express", "rest-api", "ejs", "fetch"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}

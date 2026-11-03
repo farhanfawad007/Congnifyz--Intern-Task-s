@@ -1,0 +1,31 @@
+{
+  "name": "cognifyz-task-8",
+  "version": "1.0.0",
+  "description": "Task 8: Advanced Server-Side Functionality with Express, Redis, Bull, and EJS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "worker": "node queue/worker.js",
+    "dev": "node --watch server.js",
+    "dev:worker": "node --watch queue/worker.js",
+    "start:all": "powershell -ExecutionPolicy Bypass -File ./start.ps1",
+    "redis:up": "docker compose up -d",
+    "redis:down": "docker compose down"
+  },
+  "keywords": [
+    "express",
+    "redis",
+    "bull",
+    "ejs",
+    "cognifyz"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bull": "^4.16.5",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^4.22.2",
+    "ioredis": "^5.11.1",
+    "morgan": "^1.11.0"
+  }
+}

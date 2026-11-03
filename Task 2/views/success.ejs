@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #f4f6f8; color: #333;">
+
+  <div style="max-width: 520px; margin: 40px auto; padding: 32px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: center;">
+
+    <div style="width: 64px; height: 64px; margin: 0 auto 20px auto; background-color: #d4edda; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #28a745;">
+      &#10003;
+    </div>
+
+    <h1 style="margin: 0 0 8px 0; font-size: 28px; color: #1a1a2e;">Registration Successful!</h1>
+    <p style="margin: 0 0 28px 0; font-size: 14px; color: #666;">Your details have been saved successfully.</p>
+
+    <div style="text-align: left; padding: 20px 24px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; margin-bottom: 28px;">
+      <h2 style="margin: 0 0 16px 0; font-size: 18px; color: #1a1a2e;">Submission Details</h2>
+
+      <p style="margin: 0 0 10px 0; font-size: 15px;">
+        <strong style="color: #555;">Name:</strong>
+        <span style="color: #333;"><%= record.name %></span>
+      </p>
+
+      <p style="margin: 0 0 10px 0; font-size: 15px;">
+        <strong style="color: #555;">Email:</strong>
+        <span style="color: #333;"><%= record.email %></span>
+      </p>
+
+      <p style="margin: 0 0 10px 0; font-size: 15px;">
+        <strong style="color: #555;">Age:</strong>
+        <span style="color: #333;"><%= record.age %></span>
+      </p>
+
+      <p style="margin: 0; font-size: 15px;">
+        <strong style="color: #555;">Submitted At:</strong>
+        <span style="color: #333;"><%= new Date(record.submittedAt).toLocaleString() %></span>
+      </p>
+    </div>
+
+    <a
+      href="/"
+      style="display: inline-block; padding: 12px 28px; font-size: 15px; font-weight: bold; color: #ffffff; background-color: #4a90d9; border-radius: 6px; text-decoration: none;"
+    >
+      Register Another User
+    </a>
+
+  </div>
+
+</body>
+</html>
